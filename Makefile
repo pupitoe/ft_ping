@@ -6,15 +6,15 @@
 #    By: tlassere <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/27 19:58:15 by tlassere          #+#    #+#              #
-#    Updated: 2024/08/27 20:05:45 by tlassere         ###   ########.fr        #
+#    Updated: 2024/08/27 22:48:58 by tlassere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	::= ft_ping
 
-SRCS	::= main.c
+SRCS	::= main.c ft_args.c
 OBJS	::= $(SRCS:.c=.o)
-CFLAG	::= -Wall -Wextra -Werror
+CFLAGS	::= -Wall -Wextra -Werror
 CC		::= cc
 
 all: $(NAME)
@@ -23,9 +23,9 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	rm $(OBJS)
+	rm -f $(OBJS)
 
 fclean: clean
-	rm $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
