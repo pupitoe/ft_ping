@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 21:35:32 by tlassere          #+#    #+#             */
-/*   Updated: 2025/08/06 11:27:54 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/08/06 14:41:46 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>
+
+#define DOT 1
+#define NUMBER 0
 
 # define SUCCESS 0
 # define FAIL 1
