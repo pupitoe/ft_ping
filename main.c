@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 21:44:05 by tlassere          #+#    #+#             */
-/*   Updated: 2025/08/05 12:14:22 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/08/06 11:48:19 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static void	ft_execut(t_args *args)
 {
 	if (args->domain)
 	{
-		printf("%s\n", args->domain);
+		printf("domain: %s\n", args->domain);
+		printf("type: %d\n", args->domain_type);
 	}
 	else
 	{
@@ -26,7 +27,7 @@ static void	ft_execut(t_args *args)
 	}
 }
 
-int	single_car(char *str, t_args *args)
+int	find_flag(char *str, t_args *args)
 {
 	while (*str)
 	{
@@ -40,7 +41,7 @@ int	single_car(char *str, t_args *args)
 				return (FAIL);
 				break;
 			default:
-				fprintf(stderr, "ping: option requires an argument -- '%c'\n", *str);
+				fprintf(stderr, "ft_ping: option requires an argument -- '%c'\n", *str);
 				ft_print_args(args);
 				return (FAIL);
 				break;
@@ -50,15 +51,47 @@ int	single_car(char *str, t_args *args)
 	return (SUCCESS);
 }
 
+#define DOT 1
+#define NUMBER 0
+
+int set_domain(char *str, t_args *args)
+{
+	size_t	i = 0;
+	int		dot = 0;
+	int		number = 0;
+	int		flag = NUMBER;
+	char	*end = NULL;
+	
+	if (args->domain)
+		return (SUCCESS);
+	args->domain = str;
+	while (str[i] && args->domain_type != DT_DOMAIN_NAME)
+	{
+		if (str[i] == '.' && flag == DOT)
+		{
+			flag = NUMBER;
+			dot++;
+		}
+		else if (isalpha(str[i]) && flag == NUMBER && strtol(str + i, &end, 10) < 256)
+		{
+			flag = DOT;
+			i = end - str - 1;
+			number++;
+		}
+		else
+			args->domain_type = DT_DOMAIN_NAME;
+		i++;
+	}
+	if (number != 4 && dot != 3)
+		args->domain_type = DT_DOMAIN_NAME;
+	return (SUCCESS);
+}
+
 int	put_arg(char *str, t_args *args)
 {
 	if (str[0] == '-' && str[1])
-	{
-		if (str[1] == '-' && str[2])
-			return (SUCCESS); // return parameter multie caracters
-		return (single_car(str + 1, args));
-	}
-	return (SUCCESS); // return destination address
+		return (find_flag(str + 1, args));
+	return (set_domain(str, args));
 }
 
 int	ft_init_args(char **argv, t_args *args)
@@ -70,6 +103,12 @@ int	ft_init_args(char **argv, t_args *args)
 		if (put_arg(*argv, args) != SUCCESS)
 			return (FAIL);
 		argv++;
+	}
+	if (!args->domain)
+	{
+		fprintf(stderr, "ft_ping: usage error: Destination address required\n");
+		args->ret = 1;
+		return (FAIL);
 	}
 	return (SUCCESS);
 }
