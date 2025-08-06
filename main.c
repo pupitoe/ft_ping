@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 21:44:05 by tlassere          #+#    #+#             */
-/*   Updated: 2025/08/06 11:48:19 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/08/06 14:38:15 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int set_domain(char *str, t_args *args)
 			flag = NUMBER;
 			dot++;
 		}
-		else if (isalpha(str[i]) && flag == NUMBER && strtol(str + i, &end, 10) < 256)
+		else if (isdigit(str[i]) && flag == NUMBER && strtol(str + i, &end, 10) < 256)
 		{
 			flag = DOT;
 			i = end - str - 1;
@@ -82,7 +82,7 @@ int set_domain(char *str, t_args *args)
 			args->domain_type = DT_DOMAIN_NAME;
 		i++;
 	}
-	if (number != 4 && dot != 3)
+	if (number != 4 || dot != 3)
 		args->domain_type = DT_DOMAIN_NAME;
 	return (SUCCESS);
 }
