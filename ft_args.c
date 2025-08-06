@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 21:28:19 by tlassere          #+#    #+#             */
-/*   Updated: 2025/08/06 14:42:47 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/08/06 14:49:01 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	ft_init_args(char **argv, t_args *args)
 	}
 	if (!args->domain)
 	{
-		fprintf(stderr, "ft_ping: usage error: Destination address required\n");
+		fprintf(stderr, ERR_ADDR);
 		args->ret = 1;
 		return (FAIL);
 	}
