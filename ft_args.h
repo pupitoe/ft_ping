@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 21:27:03 by tlassere          #+#    #+#             */
-/*   Updated: 2025/08/06 14:43:12 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/08/09 15:57:20 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ typedef struct s_opt
 
 typedef struct s_args
 {
-	char	*domain; // not allowed
+	char	*domain;
+	char	*ip;
 	int		domain_type;
 	t_opt	opt;
 	int		ret;
@@ -38,5 +39,6 @@ typedef struct s_args
 
 void	ft_print_args(t_args *args);
 int		ft_init_args(char **argv, t_args *args);
+void	free_args(t_args *args);
 
 #endif

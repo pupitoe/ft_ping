@@ -6,25 +6,17 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 21:44:05 by tlassere          #+#    #+#             */
-/*   Updated: 2025/08/06 14:42:14 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/08/09 15:58:32 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ping.h"
 #include "ft_args.h"
 
-static void	ft_execut(t_args *args)
+static void	ft_exec(t_args *args)
 {
-	if (args->domain)
-	{
-		printf("domain: %s\n", args->domain);
-		printf("type: %d\n", args->domain_type);
-	}
-	else
-	{
-		fprintf(stderr, ERR_ADDR);
-		args->ret = 1;
-	}
+	printf("domain: %s\n", args->domain);
+	printf("type: %d\n", args->domain_type);
 }
 
 int	main(int argc, char **argv)
@@ -32,7 +24,8 @@ int	main(int argc, char **argv)
 	t_args	args;
 
 	if (ft_init_args(++argv, &args) == SUCCESS)
-		ft_execut(&args);
+		ft_exec(&args);
+	free_args(&args);
 	(void)argc;
 	return (args.ret);
 }

@@ -6,7 +6,7 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 21:28:19 by tlassere          #+#    #+#             */
-/*   Updated: 2025/08/06 14:49:01 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/08/09 15:52:58 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ static int set_domain(char *str, t_args *args)
 	
 	if (args->domain)
 		return (SUCCESS);
-	args->domain = str;
+	args->domain = strdup(str);
+	if (!args->domain)
+		return (FAIL);
 	while (str[i] && args->domain_type != DT_DOMAIN_NAME)
 	{
 		if (str[i] == '.' && flag == DOT)
@@ -104,4 +106,10 @@ int	ft_init_args(char **argv, t_args *args)
 		return (FAIL);
 	}
 	return (SUCCESS);
+}
+
+void	free_args(t_args *args)
+{
+	free(args->domain);
+	free(args->ip);
 }
