@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_data.h                                          :+:      :+:    :+:   */
+/*   ft_data.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/15 14:36:09 by tlassere          #+#    #+#             */
-/*   Updated: 2025/08/15 14:58:26 by tlassere         ###   ########.fr       */
+/*   Created: 2025/08/15 14:54:30 by tlassere          #+#    #+#             */
+/*   Updated: 2025/08/15 14:58:08 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_DATA_H
-# define FT_DATA_H
+#include "ft_data.h"
 
-# include "ft_args.h"
-# include <unistd.h>
-
-typedef struct s_data
+void	free_data(t_data *data)
 {
-	t_args *args;
-	int		socket;
-}	t_data;
-
-void	free_data(t_data *data);
-
-#endif
+	if (data->socket > 0)
+		close(data->socket);
+}

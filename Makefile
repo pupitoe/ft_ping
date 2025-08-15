@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tlassere <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/27 19:58:15 by tlassere          #+#    #+#              #
-#    Updated: 2024/08/27 22:48:58 by tlassere         ###   ########.fr        #
+#    Updated: 2025/08/15 15:02:26 by tlassere         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	::= ft_ping
 
-SRCS	::= main.c ft_args.c
+SRCS	::= main.c ft_args.c ft_data.c
 OBJS	::= $(SRCS:.c=.o)
 CFLAGS	::= -Wall -Wextra -Werror
 CC		::= cc

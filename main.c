@@ -6,13 +6,14 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 21:44:05 by tlassere          #+#    #+#             */
-/*   Updated: 2025/08/15 14:40:38 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/08/15 15:14:21 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ping.h"
 #include "ft_args.h"
 #include "ft_data.h"
+#include <netinet/ip.h>
 
 int set_ip(t_args *args)
 {
@@ -50,9 +51,14 @@ static void	ft_exec(t_args *args)
 	data.args = args;
 	if (set_ip(args) == FAIL)
 		return ;
+	// doc what is sock raw
+	// protocole TCP is use because sock_raw is used
+	data.socket = socket(AF_INET, SOCK_RAW, IPPROTO_TCP);
+	
 	printf("domain: %s\n", args->domain);
 	printf("type: %d\n", args->domain_type);
 	printf("ip: %s\n", args->ip);
+	free_data(&data);
 }
 
 int	main(int argc, char **argv)
