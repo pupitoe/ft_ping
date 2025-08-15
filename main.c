@@ -6,19 +6,20 @@
 /*   By: tlassere <tlassere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 21:44:05 by tlassere          #+#    #+#             */
-/*   Updated: 2025/08/10 13:03:35 by tlassere         ###   ########.fr       */
+/*   Updated: 2025/08/15 14:40:38 by tlassere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ping.h"
 #include "ft_args.h"
+#include "ft_data.h"
 
 int set_ip(t_args *args)
 {
 	size_t	i = 0;
 	size_t	len = strlen(args->domain) + 1;
 
-	if (args->domain_type == DT_DOMAIN_NAME)
+	if (args->domain_type == DT_DOMAIN_NAME) // TODO make this function
 	{
 		args->ip = strdup("127.0.0.1");
 		return (SUCCESS);
@@ -43,6 +44,10 @@ int set_ip(t_args *args)
 
 static void	ft_exec(t_args *args)
 {
+	t_data	data;
+
+	memset(&data, 0, sizeof(data));
+	data.args = args;
 	if (set_ip(args) == FAIL)
 		return ;
 	printf("domain: %s\n", args->domain);
